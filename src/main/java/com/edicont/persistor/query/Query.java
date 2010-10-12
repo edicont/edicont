@@ -3,11 +3,8 @@ package com.edicont.persistor.query;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.edicont.persistor.EdicontPersistor;
 import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.WriteResult;

@@ -34,18 +34,20 @@ public class EdicontServerTest extends TestCase {
 		try {
 			
 			
-			
+			//delete all stored TestObject-Instances
 			Query.create().setClazz(TestObject.class).remove(server);
 			
+			//request all instancces of class TestObject
 			List<Object> list = server.get(TestObject.class);
-			assertEquals(0, list.size());
+			assertEquals(0, list.size()); //has to be 0 as we have removed all instances first.
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			
+			//create a new Instance
 			TestObject object = new TestObject();
 			object.setId("4cae151f67b06f0b5cd7ae87");
-			object.setFirstname("Jakob");
-			object.setLastname("Dangl");
+			object.setFirstname("Hans");
+			object.setLastname("Müller");
 			object.setSize(156);
 			object.setDob(sdf.parse("1998-10-10"));
 			object.setStrings(new String[] {"schubidu", "dadada"});
@@ -73,19 +75,24 @@ public class EdicontServerTest extends TestCase {
 			tList.add(sub);
 			object.setTestSubList(tList);
 			
+			//save this object
 			server.save(object);
 			
+			
+			//read the id of this object
 			String uuid = object.getId();
 			
+			
+			//read all Instances of class TestObject.
 			list = server.get(TestObject.class);
-			assertEquals(1, list.size());
+			assertEquals(1, list.size()); //should be one now
 			
-			
+			//fetch the TestObject instance with a given id.
 			TestObject t = (TestObject) server.get(TestObject.class, uuid);
 			assertNotNull(t);
 			
-			assertEquals("Jakob", t.getFirstname());
-			assertEquals("Dangl", t.getLastname());
+			assertEquals("Hans", t.getFirstname());
+			assertEquals("Müller", t.getLastname());
 			assertEquals(156, t.getSize());
 			assertEquals(sdf.parse("1998-10-10"), t.getDob());
 			assertTrue(Arrays.deepEquals(new String[] {"schubidu", "dadada"}, t.getStrings()));
@@ -103,11 +110,12 @@ public class EdicontServerTest extends TestCase {
 			assertEquals(0, tsub.getSingleSub().getValue2());
 			
 			
+			//create and execute a query on the TestObject
 			List<Object> l = server.get(
 					Query.create()
 						.setClazz(TestObject.class)
 						.add(
-							Query.compare("lastname", "Dangl", Query.EQ)
+							Query.compare("lastname", "Müller", Query.EQ)
 						)
 						.add(
 							Query.compare("firstname", "B", Query.GT)
@@ -124,23 +132,27 @@ public class EdicontServerTest extends TestCase {
 			assertEquals(uuid, ((TestObject)l.get(0)).getId());
 			
 			
-			
+			//remove all master classes
 			Query.create().setClazz(MasterObject.class).remove(server);
 			
+			//create a master class
 			MasterObject master = new MasterObject();
 			master.setName("MASTER");
+			//set the TestObject. Will be stored as a relation.
 			master.setTestObject((TestObject) l.get(0));
 			
+			//persist it
 			server.save(master);
 			
 			assertNotNull(master.getId());
 			
+			//fetch the master again
 			MasterObject m1 = (MasterObject)server.get(MasterObject.class, master.getId());
 			
 			assertNotNull(m1);
 			assertEquals("MASTER", m1.getName());
 			assertNotNull(m1.getTestObject());
-			assertEquals("Jakob", m1.getTestObject().getFirstname());
+			assertEquals("Hans", m1.getTestObject().getFirstname());
 			
 			System.out.println(m1);
 			
