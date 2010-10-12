@@ -8,7 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.bson.types.ObjectId;
 
-import com.edicont.persistor.EdicontServer;
+import com.edicont.persistor.EdicontPersistor;
 import com.edicont.persistor.annotations.Indexed;
 import com.edicont.persistor.annotations.Reference;
 import com.edicont.persistor.annotations.Transient;
@@ -181,7 +181,7 @@ public class FieldDescription {
 	 * @throws InvocationTargetException
 	 * @throws NoSuchMethodException
 	 */
-	public Object propertyValueToDBValue(EdicontServer server, Object object) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	public Object propertyValueToDBValue(EdicontPersistor server, Object object) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		
 		log.debug("start converting of property value to mongodb value ...");
 		
@@ -233,7 +233,7 @@ public class FieldDescription {
 	 * @throws Exception 
 	 * @throws ClassNotFoundException 
 	 */
-	public void setObjectValueFromDBValue(EdicontServer server, Object object, DBObject dbObject) throws ClassNotFoundException, Exception {
+	public void setObjectValueFromDBValue(EdicontPersistor server, Object object, DBObject dbObject) throws ClassNotFoundException, Exception {
 		
 		log.debug("start converting dbObject to target object ...");
 		

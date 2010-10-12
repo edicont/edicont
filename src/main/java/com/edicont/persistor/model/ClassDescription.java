@@ -13,7 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.bson.types.ObjectId;
 
-import com.edicont.persistor.EdicontServer;
+import com.edicont.persistor.EdicontPersistor;
 import com.edicont.persistor.annotations.Entity;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -169,7 +169,7 @@ public class ClassDescription {
 	 * @param object the object to transform
 	 * @return
 	 */
-	public DBObject toMongoObject(EdicontServer server, Object object) {
+	public DBObject toMongoObject(EdicontPersistor server, Object object) {
 		
 		log.debug("start converting ["+object+"] to DBObject ...");
 		
@@ -262,7 +262,7 @@ public class ClassDescription {
 	 * @throws ClassNotFoundException
 	 * @throws Exception
 	 */
-	public Object toObject(EdicontServer server, DBObject dbObject) throws InstantiationException, IllegalAccessException, ClassNotFoundException, Exception {
+	public Object toObject(EdicontPersistor server, DBObject dbObject) throws InstantiationException, IllegalAccessException, ClassNotFoundException, Exception {
 		
 		if(dbObject==null) return null;
 		

@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-import com.edicont.persistor.EdicontServer;
+import com.edicont.persistor.EdicontPersistor;
 import com.edicont.persistor.query.Query;
 import com.mongodb.DB;
 import com.mongodb.Mongo;
@@ -15,14 +15,14 @@ import junit.framework.TestCase;
 
 public class EdicontServerTest extends TestCase {
 	
-	private EdicontServer server;
+	private EdicontPersistor server;
 
 	protected void setUp() throws Exception {
 		super.setUp();
 		Mongo mongo = new Mongo();
 		DB db = mongo.getDB("testdb");
 		
-		server = new EdicontServer();
+		server = new EdicontPersistor();
 		server.setDB(db);
 	}
 

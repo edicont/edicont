@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.edicont.persistor.EdicontServer;
+import com.edicont.persistor.EdicontPersistor;
 import com.mongodb.BasicDBList;
 import com.mongodb.DBObject;
 
@@ -96,7 +96,7 @@ public class FieldUtils {
 	 * @throws ArrayIndexOutOfBoundsException 
 	 */
 	@SuppressWarnings("unchecked")
-	public static Object createListFromDBList(EdicontServer server, Class<?> type, BasicDBList dbList) throws ArrayIndexOutOfBoundsException, IllegalArgumentException, ClassNotFoundException, Exception {
+	public static Object createListFromDBList(EdicontPersistor server, Class<?> type, BasicDBList dbList) throws ArrayIndexOutOfBoundsException, IllegalArgumentException, ClassNotFoundException, Exception {
 		
 		log.debug("start reating List from mongo List ...");
 		log.debug("dbList: "+dbList);

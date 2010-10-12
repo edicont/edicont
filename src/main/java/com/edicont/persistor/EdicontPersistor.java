@@ -25,9 +25,9 @@ import com.mongodb.DBObject;
  * @author bernhard.dangl
  * @version 0.1
  */
-public class EdicontServer {
+public class EdicontPersistor {
 	
-	private static Log log = LogFactory.getLog(EdicontServer.class);
+	private static Log log = LogFactory.getLog(EdicontPersistor.class);
 	
 	private DB db;
 	

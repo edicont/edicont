@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import com.edicont.persistor.EdicontServer;
+import com.edicont.persistor.EdicontPersistor;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -76,7 +76,7 @@ public class Query implements Restriction, ComparationConstants {
 		return result;
 	}
 	
-	public DBCursor execute(EdicontServer server) {
+	public DBCursor execute(EdicontPersistor server) {
 		DBObject dbQuery = this.toDBObject();
 		
 		DBCursor cursor = server.getCollectionOfClass(getClazz()).find(dbQuery);
@@ -93,7 +93,7 @@ public class Query implements Restriction, ComparationConstants {
 		return cursor;
 	}
 	
-	public int remove(EdicontServer server) {
+	public int remove(EdicontPersistor server) {
 		DBObject dbQuery = this.toDBObject();
 		
 		WriteResult result = server.getCollectionOfClass(getClazz()).remove(dbQuery);
