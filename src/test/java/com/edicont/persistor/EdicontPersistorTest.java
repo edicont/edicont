@@ -13,7 +13,7 @@ import com.mongodb.Mongo;
 
 import junit.framework.TestCase;
 
-public class EdicontServerTest extends TestCase {
+public class EdicontPersistorTest extends TestCase {
 	
 	private EdicontPersistor server;
 
@@ -35,9 +35,9 @@ public class EdicontServerTest extends TestCase {
 			
 			
 			//delete all stored TestObject-Instances
-			Query.create().setClazz(TestObject.class).remove(server);
+			Query.create(TestObject.class).remove(server);
 			
-			//request all instancces of class TestObject
+			//request all instances of class TestObject
 			List<Object> list = server.get(TestObject.class);
 			assertEquals(0, list.size()); //has to be 0 as we have removed all instances first.
 			
@@ -112,8 +112,7 @@ public class EdicontServerTest extends TestCase {
 			
 			//create and execute a query on the TestObject
 			List<Object> l = server.get(
-					Query.create()
-						.setClazz(TestObject.class)
+					Query.create(TestObject.class)
 						.add(
 							Query.compare("lastname", "Müller", Query.EQ)
 						)
@@ -133,7 +132,7 @@ public class EdicontServerTest extends TestCase {
 			
 			
 			//remove all master classes
-			Query.create().setClazz(MasterObject.class).remove(server);
+			Query.create(MasterObject.class).remove(server);
 			
 			//create a master class
 			MasterObject master = new MasterObject();
